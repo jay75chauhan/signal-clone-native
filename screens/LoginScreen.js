@@ -19,7 +19,11 @@ const LoginScreen = ({ navigation }) => {
     return unsubscribe;
   }, []);
 
-  const signIn = () => {};
+  const signIn = () => {
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => alert(error));
+  };
 
   return (
     <KeyboardAvoidingView behavior="" style={styles.container}>
@@ -28,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
         source={{
           uri: "https://logowik.com/content/uploads/images/signal-messenger-icon9117.jpg",
         }}
-        style={{ width: 150, height: 150 }}
+        style={{ width: 120, height: 120 }}
       />
       <View style={styles.inputContainer}>
         <Input
@@ -41,9 +45,9 @@ const LoginScreen = ({ navigation }) => {
         <Input
           placeholder="Password"
           secureTextEntry
-         
           type="password"
           value={password}
+          onSubmitEditing={signIn}
           onChangeText={(text) => setPassword(text)}
         />
       </View>
@@ -69,6 +73,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   inputContainer: {
+    marginTop: 15,
     width: 300,
   },
   button: {

@@ -22,7 +22,7 @@ const RegisterScreen = ({ navigation }) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        authUser.user.update({
+        authUser.user.updateProfile({
           displayName: name,
           photoURL:
             imageUrl ||
@@ -45,27 +45,27 @@ const RegisterScreen = ({ navigation }) => {
           autoFocus
           type="text"
           value={name}
-          onChange={(text) => setName(text)}
+          onChangeText={(text) => setName(text)}
         />
         <Input
           placeholder="Email"
           type="email"
           value={email}
-          onChange={(text) => setEmail(text)}
+          onChangeText={(text) => setEmail(text)}
         />
         <Input
           placeholder="Password"
           type="password"
           secureTextEntry
           value={password}
-          onChange={(text) => setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
         />
         <Input
           placeholder="Profile Picture URL (optional)"
           type="text"
           value={imageUrl}
           onChange={(text) => setImageUrl(text)}
-          onSubmitEditing={register}
+          onSubmitEditingText={register}
         />
       </View>
 
@@ -73,6 +73,7 @@ const RegisterScreen = ({ navigation }) => {
         title="Register"
         onPress={register}
         raised
+        type="text"
         containerStyle={styles.button}
       />
       <View style={{ height: 10 }}></View>
