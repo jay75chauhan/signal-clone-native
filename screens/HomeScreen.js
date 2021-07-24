@@ -38,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <TouchableOpacity activeOpacity={0.5} onPress={signOutUser}>
-            <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+            <Avatar rounded source={{ uri: auth.currentUser.photoURL }} />
           </TouchableOpacity>
         </View>
       ),
@@ -74,6 +74,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
+      <StatusBar style="" />
       <ScrollView style={styles.container}>
         {chats.map(({ id, data: { chatName } }) => (
           <CustomListItem
@@ -93,5 +94,6 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     height: "100%",
+    top: 0,
   },
 });

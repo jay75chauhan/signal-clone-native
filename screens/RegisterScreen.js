@@ -26,7 +26,7 @@ const RegisterScreen = ({ navigation }) => {
           displayName: name,
           photoURL:
             imageUrl ||
-            "https://image.flaticon.com/icons/png/512/3237/3237476.png",
+            "https://image.flaticon.com/icons/png/512/1177/1177568.png",
         });
       })
       .catch((error) => alert(error.message));
@@ -64,7 +64,7 @@ const RegisterScreen = ({ navigation }) => {
           placeholder="Profile Picture URL (optional)"
           type="text"
           value={imageUrl}
-          onChange={(text) => setImageUrl(text)}
+          onChangeText={(text) => setImageUrl(text)}
           onSubmitEditingText={register}
         />
       </View>
