@@ -1,13 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState, useLayoutEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Avatar } from "react-native-elements";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native";
 import CustomListItem from "../components/CustomListItem";
 import { auth, db } from "../firebase";
+import { StatusBar } from "expo-status-bar";
 
 const HomeScreen = ({ navigation }) => {
   const [chats, setChats] = useState([]);
@@ -31,14 +31,19 @@ const HomeScreen = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Signal",
+      title: ` ${auth.currentUser.displayName} `,
       headerStyle: { backgroundColor: "#fff" },
       headerTitleStyle: { color: "#111" },
       headerTintColor: "#111",
       headerLeft: () => (
-        <View style={{ marginLeft: 20 }}>
+        <View style={{ marginLeft: 20, marginBottom: 0 }}>
           <TouchableOpacity activeOpacity={0.5} onPress={signOutUser}>
-            <Avatar rounded source={{ uri: auth.currentUser.photoURL }} />
+            <Avatar
+              rounded
+              source={{
+                uri: `${auth.currentUser.photoURL}`,
+              }}
+            />
           </TouchableOpacity>
         </View>
       ),
@@ -48,6 +53,7 @@ const HomeScreen = ({ navigation }) => {
             flexDirection: "row",
             justifyContent: "space-between",
             width: 80,
+            marginBottom: 0,
             marginRight: 20,
           }}
         >
@@ -63,7 +69,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       ),
     });
-  }, [navigation]);
+  });
 
   const enterChat = (id, chatName) => {
     navigation.navigate("Chat", {
@@ -73,18 +79,20 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView>
-      <StatusBar style="" />
-      <ScrollView style={styles.container}>
-        {chats.map(({ id, data: { chatName } }) => (
-          <CustomListItem
-            key={id}
-            id={id}
-            chatName={chatName}
-            enterChat={enterChat}
-          />
-        ))}
-      </ScrollView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
+      <StatusBar backgroundColor="#fff" />
+      <>
+        <ScrollView style={styles.container}>
+          {chats.map(({ id, data: { chatName } }) => (
+            <CustomListItem
+              key={id}
+              id={id}
+              chatName={chatName}
+              enterChat={enterChat}
+            />
+          ))}
+        </ScrollView>
+      </>
     </SafeAreaView>
   );
 };
@@ -94,6 +102,5 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    top: 0,
   },
 });

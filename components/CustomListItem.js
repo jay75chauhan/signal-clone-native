@@ -29,7 +29,7 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
             chatMessages?.[0]?.photoURL ||
             "https://image.flaticon.com/icons/png/512/1177/1177568.png",
         }}
-      ></Avatar>
+      />
       <ListItem.Content>
         <ListItem.Title style={{ fontWeight: "800" }}>
           {chatName}

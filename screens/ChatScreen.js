@@ -35,7 +35,9 @@ const ChatScreen = ({ navigation, route }) => {
           <Avatar
             rounded
             source={{
-              uri: messages[0]?.data.photoURL,
+              uri:
+                messages[0]?.data.photoURL ||
+                "https://image.flaticon.com/icons/png/512/1177/1177568.png",
             }}
           />
           <Text
